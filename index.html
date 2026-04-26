@@ -42,6 +42,8 @@
   }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: #fafafa; }
+  tr.all-starred td { background: #fff8d6; }
+  tr.all-starred:hover td { background: #fff2bd; }
   td.num { color: #999; width: 40px; }
   td.name { font-weight: 500; width: 240px; }
   td.name .name-cell {
@@ -237,16 +239,26 @@
       });
     }
 
+    function updateRowHighlight(tr, row) {
+      const allOn = COLS.every(col => state[key(row, col)]);
+      tr.classList.toggle('all-starred', allOn);
+    }
+
     function renderState() {
-      document.querySelectorAll('.star').forEach(span => {
-        const k = key(span.dataset.row, span.dataset.col);
-        if (state[k]) {
-          span.classList.add('on');
-          span.textContent = '\u2605';
-        } else {
-          span.classList.remove('on');
-          span.textContent = '\u2606';
-        }
+      document.querySelectorAll('tbody tr').forEach(tr => {
+        const row = tr.querySelector('td.num').textContent.trim();
+        COLS.forEach(col => {
+          const span = tr.querySelector('.star[data-row="' + row + '"][data-col="' + col + '"]');
+          if (!span) return;
+          if (state[key(row, col)]) {
+            span.classList.add('on');
+            span.textContent = '\u2605';
+          } else {
+            span.classList.remove('on');
+            span.textContent = '\u2606';
+          }
+        });
+        updateRowHighlight(tr, row);
       });
     }
 
@@ -293,6 +305,7 @@
         span.classList.add('on');
         span.textContent = '\u2605';
       }
+      updateRowHighlight(span.closest('tr'), row);
       pushState();
     }
 
