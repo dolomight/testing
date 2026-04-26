@@ -37,10 +37,36 @@
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: #fafafa; }
   td.num { color: #999; width: 40px; }
-  td.name { font-weight: 500; width: 240px; }
+  td.name { font-weight: 500; width: 220px; }
   a { color: #0066cc; text-decoration: none; }
   a:hover { text-decoration: underline; }
   a:visited { color: #884499; }
+  th.star-col, td.star-col {
+    text-align: center;
+    width: 40px;
+    padding: 12px 8px;
+  }
+  .star {
+    cursor: pointer;
+    font-size: 20px;
+    color: #ccc;
+    user-select: none;
+    transition: color 0.15s, transform 0.15s;
+    display: inline-block;
+  }
+  .star:hover { transform: scale(1.2); }
+  .star.on { color: #f5b301; }
+  .reset-btn {
+    margin-top: 16px;
+    background: none;
+    border: 1px solid #ddd;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #666;
+    font-size: 12px;
+  }
+  .reset-btn:hover { background: #f0f0f0; }
 </style>
 </head>
 <body>
@@ -48,7 +74,7 @@
   <p class="subtitle">University of Cincinnati DAAP Industrial Design Class of 2026 · 62 students</p>
   <table>
     <thead>
-      <tr><th>#</th><th>Student</th><th>Portfolio</th></tr>
+      <tr><th>#</th><th>Student</th><th>Portfolio</th><th class="star-col">S</th><th class="star-col">A</th><th class="star-col">J</th></tr>
     </thead>
     <tbody>
       <tr><td class="num">1</td><td class="name">Alex Ernsell</td><td><a href="https://alexernsell.com" target="_blank" rel="noopener">alexernsell.com</a></td></tr>
@@ -115,5 +141,49 @@
       <tr><td class="num">62</td><td class="name">Zoe Hong</td><td><a href="https://zoehongid.com" target="_blank" rel="noopener">zoehongid.com</a></td></tr>
     </tbody>
   </table>
+  <button class="reset-btn" id="reset">Reset all stars</button>
+  <script>
+    const STORAGE_KEY = 'ucid2026_stars';
+    const COLS = ['S', 'A', 'J'];
+    const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+
+    function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+
+    function key(row, col) { return row + ':' + col; }
+
+    document.querySelectorAll('tbody tr').forEach(tr => {
+      const row = tr.querySelector('td.num').textContent.trim();
+      COLS.forEach(col => {
+        const td = document.createElement('td');
+        td.className = 'star-col';
+        const span = document.createElement('span');
+        span.className = 'star';
+        const isOn = !!state[key(row, col)];
+        span.textContent = isOn ? '\u2605' : '\u2606';
+        if (isOn) span.classList.add('on');
+        span.addEventListener('click', () => {
+          const k = key(row, col);
+          if (state[k]) {
+            delete state[k];
+            span.classList.remove('on');
+            span.textContent = '\u2606';
+          } else {
+            state[k] = true;
+            span.classList.add('on');
+            span.textContent = '\u2605';
+          }
+          save();
+        });
+        td.appendChild(span);
+        tr.appendChild(td);
+      });
+    });
+
+    document.getElementById('reset').addEventListener('click', () => {
+      if (!confirm('Clear all star selections?')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    });
+  </script>
 </body>
 </html>
