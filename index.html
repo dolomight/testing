@@ -16,7 +16,8 @@
   .subtitle { color: #666; margin-bottom: 24px; font-size: 14px; }
   table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     background: #fff;
     box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     border-radius: 8px;
@@ -27,12 +28,16 @@
     padding: 12px 16px;
     border-bottom: 1px solid #eee;
   }
-  th {
+  thead th {
+    position: sticky;
+    top: 0;
     background: #f4f4f4;
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: #555;
+    z-index: 10;
+    box-shadow: 0 1px 0 #ddd;
   }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: #fafafa; }
@@ -56,8 +61,14 @@
   }
   .star:hover { transform: scale(1.2); }
   .star.on { color: #f5b301; }
-  .reset-btn {
+  .toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .reset-btn {
     background: none;
     border: 1px solid #ddd;
     padding: 6px 12px;
@@ -67,11 +78,14 @@
     font-size: 12px;
   }
   .reset-btn:hover { background: #f0f0f0; }
+  #sync-status { color: #888; font-size: 12px; }
+  #sync-status.error { color: #c0392b; }
+  #sync-status.ok { color: #2a8a3e; }
 </style>
 </head>
 <body>
   <h1>UC ID 2026 — Senior Showcase Portfolios</h1>
-  <p class="subtitle">University of Cincinnati DAAP Industrial Design Class of 2026 · 62 students</p>
+  <p class="subtitle">University of Cincinnati DAAP Industrial Design Class of 2026 · 62 students · Stars sync across all viewers</p>
   <table>
     <thead>
       <tr><th>#</th><th>Student</th><th>Portfolio</th><th class="star-col">S</th><th class="star-col">A</th><th class="star-col">J</th></tr>
@@ -141,80 +155,111 @@
       <tr><td class="num">62</td><td class="name">Zoe Hong</td><td><a href="https://zoehongid.com" target="_blank" rel="noopener">zoehongid.com</a></td></tr>
     </tbody>
   </table>
-  <button class="reset-btn" id="copy">Copy my picks</button>
-  <button class="reset-btn" id="reset">Reset all stars</button>
-  <span id="copy-status" style="margin-left: 12px; color: #2a8a3e; font-size: 13px;"></span>
+  <div class="toolbar">
+    <button class="reset-btn" id="reset">Reset all stars</button>
+    <span id="sync-status">Loading…</span>
+  </div>
   <script>
-    const STORAGE_KEY = 'ucid2026_stars';
+    const BLOB_URL = 'https://jsonblob.com/api/jsonBlob/019dc9ef-4a5a-773f-bac3-29769a8f9866';
     const COLS = ['S', 'A', 'J'];
-    const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-
-    function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+    const POLL_MS = 4000;
+    let state = {};
+    let pendingWrite = false;
+    const status = document.getElementById('sync-status');
 
     function key(row, col) { return row + ':' + col; }
+    function setStatus(msg, cls) {
+      status.textContent = msg;
+      status.className = cls || '';
+    }
 
-    document.querySelectorAll('tbody tr').forEach(tr => {
-      const row = tr.querySelector('td.num').textContent.trim();
-      COLS.forEach(col => {
-        const td = document.createElement('td');
-        td.className = 'star-col';
-        const span = document.createElement('span');
-        span.className = 'star';
-        const isOn = !!state[key(row, col)];
-        span.textContent = isOn ? '\u2605' : '\u2606';
-        if (isOn) span.classList.add('on');
-        span.addEventListener('click', () => {
-          const k = key(row, col);
-          if (state[k]) {
-            delete state[k];
-            span.classList.remove('on');
-            span.textContent = '\u2606';
-          } else {
-            state[k] = true;
-            span.classList.add('on');
-            span.textContent = '\u2605';
-          }
-          save();
-        });
-        td.appendChild(span);
-        tr.appendChild(td);
-      });
-    });
-
-    document.getElementById('reset').addEventListener('click', () => {
-      if (!confirm('Clear all star selections?')) return;
-      localStorage.removeItem(STORAGE_KEY);
-      location.reload();
-    });
-
-    document.getElementById('copy').addEventListener('click', async () => {
-      const picksByCol = { S: [], A: [], J: [] };
+    function buildStars() {
       document.querySelectorAll('tbody tr').forEach(tr => {
-        const num = tr.querySelector('td.num').textContent.trim();
-        const name = tr.querySelector('td.name').textContent.trim();
-        const url = tr.querySelector('a').href;
+        const row = tr.querySelector('td.num').textContent.trim();
         COLS.forEach(col => {
-          if (state[key(num, col)]) picksByCol[col].push(`${name} — ${url}`);
+          const td = document.createElement('td');
+          td.className = 'star-col';
+          const span = document.createElement('span');
+          span.className = 'star';
+          span.dataset.row = row;
+          span.dataset.col = col;
+          span.textContent = '\u2606';
+          span.addEventListener('click', () => toggle(row, col, span));
+          td.appendChild(span);
+          tr.appendChild(td);
         });
       });
-      const lines = [];
-      COLS.forEach(col => {
-        if (picksByCol[col].length) {
-          lines.push(`${col}'s picks:`);
-          picksByCol[col].forEach(p => lines.push(`  • ${p}`));
-          lines.push('');
+    }
+
+    function renderState() {
+      document.querySelectorAll('.star').forEach(span => {
+        const k = key(span.dataset.row, span.dataset.col);
+        if (state[k]) {
+          span.classList.add('on');
+          span.textContent = '\u2605';
+        } else {
+          span.classList.remove('on');
+          span.textContent = '\u2606';
         }
       });
-      const text = lines.join('\n').trim() || 'No picks yet.';
+    }
+
+    async function fetchState() {
       try {
-        await navigator.clipboard.writeText(text);
-        const status = document.getElementById('copy-status');
-        status.textContent = '✓ Copied to clipboard';
-        setTimeout(() => status.textContent = '', 2500);
+        const r = await fetch(BLOB_URL, { cache: 'no-store' });
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        const data = await r.json();
+        state = (data && data.stars) || {};
+        renderState();
+        setStatus('Synced ' + new Date().toLocaleTimeString(), 'ok');
       } catch (e) {
-        prompt('Copy your picks:', text);
+        setStatus('Sync error: ' + e.message, 'error');
       }
+    }
+
+    async function pushState() {
+      if (pendingWrite) return;
+      pendingWrite = true;
+      try {
+        setStatus('Saving…');
+        const r = await fetch(BLOB_URL, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ stars: state })
+        });
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        setStatus('Saved ' + new Date().toLocaleTimeString(), 'ok');
+      } catch (e) {
+        setStatus('Save error: ' + e.message, 'error');
+      } finally {
+        pendingWrite = false;
+      }
+    }
+
+    function toggle(row, col, span) {
+      const k = key(row, col);
+      if (state[k]) {
+        delete state[k];
+        span.classList.remove('on');
+        span.textContent = '\u2606';
+      } else {
+        state[k] = true;
+        span.classList.add('on');
+        span.textContent = '\u2605';
+      }
+      pushState();
+    }
+
+    document.getElementById('reset').addEventListener('click', async () => {
+      if (!confirm('Clear ALL star selections for everyone?')) return;
+      state = {};
+      renderState();
+      pushState();
     });
+
+    buildStars();
+    fetchState();
+    setInterval(fetchState, POLL_MS);
   </script>
 </body>
 </html>
