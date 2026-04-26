@@ -141,7 +141,9 @@
       <tr><td class="num">62</td><td class="name">Zoe Hong</td><td><a href="https://zoehongid.com" target="_blank" rel="noopener">zoehongid.com</a></td></tr>
     </tbody>
   </table>
+  <button class="reset-btn" id="copy">Copy my picks</button>
   <button class="reset-btn" id="reset">Reset all stars</button>
+  <span id="copy-status" style="margin-left: 12px; color: #2a8a3e; font-size: 13px;"></span>
   <script>
     const STORAGE_KEY = 'ucid2026_stars';
     const COLS = ['S', 'A', 'J'];
@@ -183,6 +185,35 @@
       if (!confirm('Clear all star selections?')) return;
       localStorage.removeItem(STORAGE_KEY);
       location.reload();
+    });
+
+    document.getElementById('copy').addEventListener('click', async () => {
+      const picksByCol = { S: [], A: [], J: [] };
+      document.querySelectorAll('tbody tr').forEach(tr => {
+        const num = tr.querySelector('td.num').textContent.trim();
+        const name = tr.querySelector('td.name').textContent.trim();
+        const url = tr.querySelector('a').href;
+        COLS.forEach(col => {
+          if (state[key(num, col)]) picksByCol[col].push(`${name} — ${url}`);
+        });
+      });
+      const lines = [];
+      COLS.forEach(col => {
+        if (picksByCol[col].length) {
+          lines.push(`${col}'s picks:`);
+          picksByCol[col].forEach(p => lines.push(`  • ${p}`));
+          lines.push('');
+        }
+      });
+      const text = lines.join('\n').trim() || 'No picks yet.';
+      try {
+        await navigator.clipboard.writeText(text);
+        const status = document.getElementById('copy-status');
+        status.textContent = '✓ Copied to clipboard';
+        setTimeout(() => status.textContent = '', 2500);
+      } catch (e) {
+        prompt('Copy your picks:', text);
+      }
     });
   </script>
 </body>
