@@ -43,7 +43,20 @@
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: #fafafa; }
   td.num { color: #999; width: 40px; }
-  td.name { font-weight: 500; width: 220px; }
+  td.name { font-weight: 500; width: 240px; }
+  td.name .name-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .thumb {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #eee;
+  }
   a { color: #0066cc; text-decoration: none; }
   a:hover { text-decoration: underline; }
   a:visited { color: #884499; }
@@ -92,9 +105,10 @@
     td.num, th:first-child { display: none; }
     td.name {
       width: auto;
-      max-width: 110px;
-      word-break: break-word;
+      max-width: 130px;
     }
+    td.name .name-cell { gap: 8px; }
+    .thumb { width: 28px; height: 28px; }
     td:nth-child(3) {
       max-width: 0;
     }
@@ -123,68 +137,68 @@
       <tr><th>#</th><th>Student</th><th>Portfolio</th><th class="star-col">S</th><th class="star-col">A</th><th class="star-col">J</th></tr>
     </thead>
     <tbody>
-      <tr><td class="num">1</td><td class="name">Alex Ernsell</td><td><a href="https://alexernsell.com" target="_blank" rel="noopener">alexernsell.com</a></td></tr>
-      <tr><td class="num">2</td><td class="name">Grant Kilgard</td><td><a href="https://bygrantkilgard.com" target="_blank" rel="noopener">bygrantkilgard.com</a></td></tr>
-      <tr><td class="num">3</td><td class="name">Juliana Bongiorno</td><td><a href="https://julianabongiorno.com" target="_blank" rel="noopener">julianabongiorno.com</a></td></tr>
-      <tr><td class="num">4</td><td class="name">Kera Goodall</td><td><a href="https://keragoodall.com" target="_blank" rel="noopener">keragoodall.com</a></td></tr>
-      <tr><td class="num">5</td><td class="name">Luke Holmes</td><td><a href="https://holmeslwh.com" target="_blank" rel="noopener">holmeslwh.com</a></td></tr>
-      <tr><td class="num">6</td><td class="name">Drew Ternovits</td><td><a href="https://drewternovitsdesign.com" target="_blank" rel="noopener">drewternovitsdesign.com</a></td></tr>
-      <tr><td class="num">7</td><td class="name">Joey Stange</td><td><a href="https://joeystange.com" target="_blank" rel="noopener">joeystange.com</a></td></tr>
-      <tr><td class="num">8</td><td class="name">Bella Walker</td><td><a href="https://bellawalkerdesign.com" target="_blank" rel="noopener">bellawalkerdesign.com</a></td></tr>
-      <tr><td class="num">9</td><td class="name">Auggie Ransick</td><td><a href="https://augustransick.com" target="_blank" rel="noopener">augustransick.com</a></td></tr>
-      <tr><td class="num">10</td><td class="name">Jake Manness</td><td><a href="https://jakemanness.com" target="_blank" rel="noopener">jakemanness.com</a></td></tr>
-      <tr><td class="num">11</td><td class="name">Aidan Emhuff</td><td><a href="https://aidanemhuffdesign.com" target="_blank" rel="noopener">aidanemhuffdesign.com</a></td></tr>
-      <tr><td class="num">12</td><td class="name">Gavin Parr</td><td><a href="https://gavinparr.com" target="_blank" rel="noopener">gavinparr.com</a></td></tr>
-      <tr><td class="num">13</td><td class="name">Audrey Burnard</td><td><a href="https://audreyburnardportfolio.framer.website" target="_blank" rel="noopener">audreyburnardportfolio.framer.website</a></td></tr>
-      <tr><td class="num">14</td><td class="name">Ryan Lannoye</td><td><a href="https://ryanlannoye.com" target="_blank" rel="noopener">ryanlannoye.com</a></td></tr>
-      <tr><td class="num">15</td><td class="name">Gavin Weiss</td><td><a href="https://gavinweiss.com" target="_blank" rel="noopener">gavinweiss.com</a></td></tr>
-      <tr><td class="num">16</td><td class="name">Ben Ragals</td><td><a href="https://benragals.com" target="_blank" rel="noopener">benragals.com</a></td></tr>
-      <tr><td class="num">17</td><td class="name">Mia Hutter</td><td><a href="https://miahutter.com" target="_blank" rel="noopener">miahutter.com</a></td></tr>
-      <tr><td class="num">18</td><td class="name">Bria Dues</td><td><a href="https://briadues.com" target="_blank" rel="noopener">briadues.com</a></td></tr>
-      <tr><td class="num">19</td><td class="name">Noah Pessell</td><td><a href="https://noahpessell.com" target="_blank" rel="noopener">noahpessell.com</a></td></tr>
-      <tr><td class="num">20</td><td class="name">Taegan Phelps</td><td><a href="https://taeganphelpsdesign.com" target="_blank" rel="noopener">taeganphelpsdesign.com</a></td></tr>
-      <tr><td class="num">21</td><td class="name">Hudson Leroux</td><td><a href="https://hudsonleroux.com" target="_blank" rel="noopener">hudsonleroux.com</a></td></tr>
-      <tr><td class="num">22</td><td class="name">Chloe Beckmeyer</td><td><a href="https://chloebeckmeyer.com" target="_blank" rel="noopener">chloebeckmeyer.com</a></td></tr>
-      <tr><td class="num">23</td><td class="name">Drew Mather</td><td><a href="https://drewmather.com" target="_blank" rel="noopener">drewmather.com</a></td></tr>
-      <tr><td class="num">24</td><td class="name">Will Katchadurian</td><td><a href="https://willkhatch.com" target="_blank" rel="noopener">willkhatch.com</a></td></tr>
-      <tr><td class="num">25</td><td class="name">Caroline McCarthy</td><td><a href="https://carolinemccarthy.org" target="_blank" rel="noopener">carolinemccarthy.org</a></td></tr>
-      <tr><td class="num">26</td><td class="name">Connor Schmitt</td><td><a href="https://connorwschmitt.com" target="_blank" rel="noopener">connorwschmitt.com</a></td></tr>
-      <tr><td class="num">27</td><td class="name">Garnett Martin</td><td><a href="https://garnettmartindesign.com" target="_blank" rel="noopener">garnettmartindesign.com</a></td></tr>
-      <tr><td class="num">28</td><td class="name">Jack McGlone</td><td><a href="https://jmcglonedesign.com" target="_blank" rel="noopener">jmcglonedesign.com</a></td></tr>
-      <tr><td class="num">29</td><td class="name">Trey Adams</td><td><a href="https://3adamsdesign.com" target="_blank" rel="noopener">3adamsdesign.com</a></td></tr>
-      <tr><td class="num">30</td><td class="name">Virginia Sheldon</td><td><a href="https://virginiasheldon.com" target="_blank" rel="noopener">virginiasheldon.com</a></td></tr>
-      <tr><td class="num">31</td><td class="name">Julian Moll Hooper</td><td><a href="https://designhooper.com" target="_blank" rel="noopener">designhooper.com</a></td></tr>
-      <tr><td class="num">32</td><td class="name">Sara Claytor</td><td><a href="https://saclaydesign.com" target="_blank" rel="noopener">saclaydesign.com</a></td></tr>
-      <tr><td class="num">33</td><td class="name">Caroline Berger</td><td><a href="https://carolinejberger.com" target="_blank" rel="noopener">carolinejberger.com</a></td></tr>
-      <tr><td class="num">34</td><td class="name">Jack Emmerich</td><td><a href="https://jackemmerich.com" target="_blank" rel="noopener">jackemmerich.com</a></td></tr>
-      <tr><td class="num">35</td><td class="name">Ewan Limrick</td><td><a href="https://ewanlimrick.com" target="_blank" rel="noopener">ewanlimrick.com</a></td></tr>
-      <tr><td class="num">36</td><td class="name">Jaylon Hunt</td><td><a href="https://jaylonlhunt.com" target="_blank" rel="noopener">jaylonlhunt.com</a></td></tr>
-      <tr><td class="num">37</td><td class="name">Annika Jankowsky</td><td><a href="https://annikajankowsky.com" target="_blank" rel="noopener">annikajankowsky.com</a></td></tr>
-      <tr><td class="num">38</td><td class="name">Sam Gillen</td><td><a href="https://samuelgillen.art" target="_blank" rel="noopener">samuelgillen.art</a></td></tr>
-      <tr><td class="num">39</td><td class="name">Cody Powell</td><td><a href="https://codaloo.com" target="_blank" rel="noopener">codaloo.com</a></td></tr>
-      <tr><td class="num">40</td><td class="name">Divya Vemulapalli</td><td><a href="https://divyavemulapalli.com" target="_blank" rel="noopener">divyavemulapalli.com</a></td></tr>
-      <tr><td class="num">41</td><td class="name">Chuck Hamilton</td><td><a href="https://chuckham.com" target="_blank" rel="noopener">chuckham.com</a></td></tr>
-      <tr><td class="num">42</td><td class="name">Natalie Swift</td><td><a href="https://natalieswift.com" target="_blank" rel="noopener">natalieswift.com</a></td></tr>
-      <tr><td class="num">43</td><td class="name">George Hausberger</td><td><a href="https://georgehausberger.com" target="_blank" rel="noopener">georgehausberger.com</a></td></tr>
-      <tr><td class="num">44</td><td class="name">Leo Brock</td><td><a href="https://leobrock.com" target="_blank" rel="noopener">leobrock.com</a></td></tr>
-      <tr><td class="num">45</td><td class="name">James Pacun</td><td><a href="https://jamespacun.com" target="_blank" rel="noopener">jamespacun.com</a></td></tr>
-      <tr><td class="num">46</td><td class="name">Rachel Smith</td><td><a href="https://rachelsmithindustrialdesign.com" target="_blank" rel="noopener">rachelsmithindustrialdesign.com</a></td></tr>
-      <tr><td class="num">47</td><td class="name">Tommy Mai</td><td><a href="https://tommymaix.com" target="_blank" rel="noopener">tommymaix.com</a></td></tr>
-      <tr><td class="num">48</td><td class="name">Kieran Harris</td><td><a href="https://kharrisdesign.com" target="_blank" rel="noopener">kharrisdesign.com</a></td></tr>
-      <tr><td class="num">49</td><td class="name">Ava Grudich</td><td><a href="https://avagrudich.com" target="_blank" rel="noopener">avagrudich.com</a></td></tr>
-      <tr><td class="num">50</td><td class="name">Will Falcon</td><td><a href="https://willfalcon.com" target="_blank" rel="noopener">willfalcon.com</a></td></tr>
-      <tr><td class="num">51</td><td class="name">Atara Zmora</td><td><a href="https://azmoradesign.com" target="_blank" rel="noopener">azmoradesign.com</a></td></tr>
-      <tr><td class="num">52</td><td class="name">Abby Kern</td><td><a href="https://abbykern.com" target="_blank" rel="noopener">abbykern.com</a></td></tr>
-      <tr><td class="num">53</td><td class="name">Satanaih Bers</td><td><a href="https://satanaihdesign.com" target="_blank" rel="noopener">satanaihdesign.com</a></td></tr>
-      <tr><td class="num">54</td><td class="name">Eddie Oddo</td><td><a href="https://eddieoddo.com" target="_blank" rel="noopener">eddieoddo.com</a></td></tr>
-      <tr><td class="num">55</td><td class="name">Allison Richardson</td><td><a href="https://allisonrichardsondesign.com" target="_blank" rel="noopener">allisonrichardsondesign.com</a></td></tr>
-      <tr><td class="num">56</td><td class="name">Kye Longbrake</td><td><a href="https://kyelongbrake.com" target="_blank" rel="noopener">kyelongbrake.com</a></td></tr>
-      <tr><td class="num">57</td><td class="name">Adam Wolshire</td><td><a href="https://adamwolshire.com" target="_blank" rel="noopener">adamwolshire.com</a></td></tr>
-      <tr><td class="num">58</td><td class="name">Shruti Parasher</td><td><a href="https://shrutiparasher.com" target="_blank" rel="noopener">shrutiparasher.com</a></td></tr>
-      <tr><td class="num">59</td><td class="name">Erica Frost</td><td><a href="https://erica-frost.com" target="_blank" rel="noopener">erica-frost.com</a></td></tr>
-      <tr><td class="num">60</td><td class="name">Matt Kerekanich</td><td><a href="https://mattmk.com" target="_blank" rel="noopener">mattmk.com</a></td></tr>
-      <tr><td class="num">61</td><td class="name">Ethan Phillips</td><td><a href="https://ethanp-design.com" target="_blank" rel="noopener">ethanp-design.com</a></td></tr>
-      <tr><td class="num">62</td><td class="name">Zoe Hong</td><td><a href="https://zoehongid.com" target="_blank" rel="noopener">zoehongid.com</a></td></tr>
+      <tr><td class="num">1</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/alex-ernsell.jpg" alt=""><span>Alex Ernsell</span></div></td><td><a href="https://alexernsell.com" target="_blank" rel="noopener">alexernsell.com</a></td></tr>
+      <tr><td class="num">2</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/grant-kilgard.jpg" alt=""><span>Grant Kilgard</span></div></td><td><a href="https://bygrantkilgard.com" target="_blank" rel="noopener">bygrantkilgard.com</a></td></tr>
+      <tr><td class="num">3</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/juliana-bongiorno.jpg" alt=""><span>Juliana Bongiorno</span></div></td><td><a href="https://julianabongiorno.com" target="_blank" rel="noopener">julianabongiorno.com</a></td></tr>
+      <tr><td class="num">4</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/kera-goodall.jpg" alt=""><span>Kera Goodall</span></div></td><td><a href="https://keragoodall.com" target="_blank" rel="noopener">keragoodall.com</a></td></tr>
+      <tr><td class="num">5</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/luke-holmes.jpg" alt=""><span>Luke Holmes</span></div></td><td><a href="https://holmeslwh.com" target="_blank" rel="noopener">holmeslwh.com</a></td></tr>
+      <tr><td class="num">6</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/drew-ternovits.jpg" alt=""><span>Drew Ternovits</span></div></td><td><a href="https://drewternovitsdesign.com" target="_blank" rel="noopener">drewternovitsdesign.com</a></td></tr>
+      <tr><td class="num">7</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/joey-stange.jpg" alt=""><span>Joey Stange</span></div></td><td><a href="https://joeystange.com" target="_blank" rel="noopener">joeystange.com</a></td></tr>
+      <tr><td class="num">8</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/bella-walker.jpg" alt=""><span>Bella Walker</span></div></td><td><a href="https://bellawalkerdesign.com" target="_blank" rel="noopener">bellawalkerdesign.com</a></td></tr>
+      <tr><td class="num">9</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/auggie-ransick.jpg" alt=""><span>Auggie Ransick</span></div></td><td><a href="https://augustransick.com" target="_blank" rel="noopener">augustransick.com</a></td></tr>
+      <tr><td class="num">10</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/jake-manness.jpg" alt=""><span>Jake Manness</span></div></td><td><a href="https://jakemanness.com" target="_blank" rel="noopener">jakemanness.com</a></td></tr>
+      <tr><td class="num">11</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/aidan-emhuff.jpg" alt=""><span>Aidan Emhuff</span></div></td><td><a href="https://aidanemhuffdesign.com" target="_blank" rel="noopener">aidanemhuffdesign.com</a></td></tr>
+      <tr><td class="num">12</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/gavin-parr.jpg" alt=""><span>Gavin Parr</span></div></td><td><a href="https://gavinparr.com" target="_blank" rel="noopener">gavinparr.com</a></td></tr>
+      <tr><td class="num">13</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/audrey-burnard.jpg" alt=""><span>Audrey Burnard</span></div></td><td><a href="https://audreyburnardportfolio.framer.website" target="_blank" rel="noopener">audreyburnardportfolio.framer.website</a></td></tr>
+      <tr><td class="num">14</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/ryan-lannoye.jpg" alt=""><span>Ryan Lannoye</span></div></td><td><a href="https://ryanlannoye.com" target="_blank" rel="noopener">ryanlannoye.com</a></td></tr>
+      <tr><td class="num">15</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/gavin-weiss.jpg" alt=""><span>Gavin Weiss</span></div></td><td><a href="https://gavinweiss.com" target="_blank" rel="noopener">gavinweiss.com</a></td></tr>
+      <tr><td class="num">16</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/ben-ragals.jpg" alt=""><span>Ben Ragals</span></div></td><td><a href="https://benragals.com" target="_blank" rel="noopener">benragals.com</a></td></tr>
+      <tr><td class="num">17</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/mia-hutter.jpg" alt=""><span>Mia Hutter</span></div></td><td><a href="https://miahutter.com" target="_blank" rel="noopener">miahutter.com</a></td></tr>
+      <tr><td class="num">18</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/bria-dues.jpg" alt=""><span>Bria Dues</span></div></td><td><a href="https://briadues.com" target="_blank" rel="noopener">briadues.com</a></td></tr>
+      <tr><td class="num">19</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/noah-pessell.jpg" alt=""><span>Noah Pessell</span></div></td><td><a href="https://noahpessell.com" target="_blank" rel="noopener">noahpessell.com</a></td></tr>
+      <tr><td class="num">20</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/taegan-phelps.jpg" alt=""><span>Taegan Phelps</span></div></td><td><a href="https://taeganphelpsdesign.com" target="_blank" rel="noopener">taeganphelpsdesign.com</a></td></tr>
+      <tr><td class="num">21</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/hudson-leroux.jpg" alt=""><span>Hudson Leroux</span></div></td><td><a href="https://hudsonleroux.com" target="_blank" rel="noopener">hudsonleroux.com</a></td></tr>
+      <tr><td class="num">22</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/chloe-beckmeyer.jpg" alt=""><span>Chloe Beckmeyer</span></div></td><td><a href="https://chloebeckmeyer.com" target="_blank" rel="noopener">chloebeckmeyer.com</a></td></tr>
+      <tr><td class="num">23</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/drew-mather.jpg" alt=""><span>Drew Mather</span></div></td><td><a href="https://drewmather.com" target="_blank" rel="noopener">drewmather.com</a></td></tr>
+      <tr><td class="num">24</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/will-katchadurian.jpg" alt=""><span>Will Katchadurian</span></div></td><td><a href="https://willkhatch.com" target="_blank" rel="noopener">willkhatch.com</a></td></tr>
+      <tr><td class="num">25</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/caroline-mccarthy.jpg" alt=""><span>Caroline McCarthy</span></div></td><td><a href="https://carolinemccarthy.org" target="_blank" rel="noopener">carolinemccarthy.org</a></td></tr>
+      <tr><td class="num">26</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/connor-schmitt.jpg" alt=""><span>Connor Schmitt</span></div></td><td><a href="https://connorwschmitt.com" target="_blank" rel="noopener">connorwschmitt.com</a></td></tr>
+      <tr><td class="num">27</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/garnett-martin.jpg" alt=""><span>Garnett Martin</span></div></td><td><a href="https://garnettmartindesign.com" target="_blank" rel="noopener">garnettmartindesign.com</a></td></tr>
+      <tr><td class="num">28</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/jack-mcglone.jpg" alt=""><span>Jack McGlone</span></div></td><td><a href="https://jmcglonedesign.com" target="_blank" rel="noopener">jmcglonedesign.com</a></td></tr>
+      <tr><td class="num">29</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/trey-adams.jpg" alt=""><span>Trey Adams</span></div></td><td><a href="https://3adamsdesign.com" target="_blank" rel="noopener">3adamsdesign.com</a></td></tr>
+      <tr><td class="num">30</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/virginia-sheldon.jpg" alt=""><span>Virginia Sheldon</span></div></td><td><a href="https://virginiasheldon.com" target="_blank" rel="noopener">virginiasheldon.com</a></td></tr>
+      <tr><td class="num">31</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/julian-moll-hooper.jpg" alt=""><span>Julian Moll Hooper</span></div></td><td><a href="https://designhooper.com" target="_blank" rel="noopener">designhooper.com</a></td></tr>
+      <tr><td class="num">32</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/sara-claytor.jpg" alt=""><span>Sara Claytor</span></div></td><td><a href="https://saclaydesign.com" target="_blank" rel="noopener">saclaydesign.com</a></td></tr>
+      <tr><td class="num">33</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/caroline-berger.jpg" alt=""><span>Caroline Berger</span></div></td><td><a href="https://carolinejberger.com" target="_blank" rel="noopener">carolinejberger.com</a></td></tr>
+      <tr><td class="num">34</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/jack-emmerich.jpg" alt=""><span>Jack Emmerich</span></div></td><td><a href="https://jackemmerich.com" target="_blank" rel="noopener">jackemmerich.com</a></td></tr>
+      <tr><td class="num">35</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/ewan-limrick.jpg" alt=""><span>Ewan Limrick</span></div></td><td><a href="https://ewanlimrick.com" target="_blank" rel="noopener">ewanlimrick.com</a></td></tr>
+      <tr><td class="num">36</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/jaylon-hunt.jpg" alt=""><span>Jaylon Hunt</span></div></td><td><a href="https://jaylonlhunt.com" target="_blank" rel="noopener">jaylonlhunt.com</a></td></tr>
+      <tr><td class="num">37</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/annika-jankowsky.jpg" alt=""><span>Annika Jankowsky</span></div></td><td><a href="https://annikajankowsky.com" target="_blank" rel="noopener">annikajankowsky.com</a></td></tr>
+      <tr><td class="num">38</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/sam-gillen.jpg" alt=""><span>Sam Gillen</span></div></td><td><a href="https://samuelgillen.art" target="_blank" rel="noopener">samuelgillen.art</a></td></tr>
+      <tr><td class="num">39</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/cody-powell.jpg" alt=""><span>Cody Powell</span></div></td><td><a href="https://codaloo.com" target="_blank" rel="noopener">codaloo.com</a></td></tr>
+      <tr><td class="num">40</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/divya-vemulapalli.jpg" alt=""><span>Divya Vemulapalli</span></div></td><td><a href="https://divyavemulapalli.com" target="_blank" rel="noopener">divyavemulapalli.com</a></td></tr>
+      <tr><td class="num">41</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/chuck-hamilton.jpg" alt=""><span>Chuck Hamilton</span></div></td><td><a href="https://chuckham.com" target="_blank" rel="noopener">chuckham.com</a></td></tr>
+      <tr><td class="num">42</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/natalie-swift.jpg" alt=""><span>Natalie Swift</span></div></td><td><a href="https://natalieswift.com" target="_blank" rel="noopener">natalieswift.com</a></td></tr>
+      <tr><td class="num">43</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/george-hausberger.jpg" alt=""><span>George Hausberger</span></div></td><td><a href="https://georgehausberger.com" target="_blank" rel="noopener">georgehausberger.com</a></td></tr>
+      <tr><td class="num">44</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/leo-brock.jpg" alt=""><span>Leo Brock</span></div></td><td><a href="https://leobrock.com" target="_blank" rel="noopener">leobrock.com</a></td></tr>
+      <tr><td class="num">45</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/james-pacun.jpg" alt=""><span>James Pacun</span></div></td><td><a href="https://jamespacun.com" target="_blank" rel="noopener">jamespacun.com</a></td></tr>
+      <tr><td class="num">46</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/rachel-smith.jpg" alt=""><span>Rachel Smith</span></div></td><td><a href="https://rachelsmithindustrialdesign.com" target="_blank" rel="noopener">rachelsmithindustrialdesign.com</a></td></tr>
+      <tr><td class="num">47</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/tommy-mai.jpg" alt=""><span>Tommy Mai</span></div></td><td><a href="https://tommymaix.com" target="_blank" rel="noopener">tommymaix.com</a></td></tr>
+      <tr><td class="num">48</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/kieran-harris.jpg" alt=""><span>Kieran Harris</span></div></td><td><a href="https://kharrisdesign.com" target="_blank" rel="noopener">kharrisdesign.com</a></td></tr>
+      <tr><td class="num">49</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/ava-grudich.jpg" alt=""><span>Ava Grudich</span></div></td><td><a href="https://avagrudich.com" target="_blank" rel="noopener">avagrudich.com</a></td></tr>
+      <tr><td class="num">50</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/will-falcon.jpg" alt=""><span>Will Falcon</span></div></td><td><a href="https://willfalcon.com" target="_blank" rel="noopener">willfalcon.com</a></td></tr>
+      <tr><td class="num">51</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/atara-zmora.jpg" alt=""><span>Atara Zmora</span></div></td><td><a href="https://azmoradesign.com" target="_blank" rel="noopener">azmoradesign.com</a></td></tr>
+      <tr><td class="num">52</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/abby-kern.jpg" alt=""><span>Abby Kern</span></div></td><td><a href="https://abbykern.com" target="_blank" rel="noopener">abbykern.com</a></td></tr>
+      <tr><td class="num">53</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/satanaih-bers.jpg" alt=""><span>Satanaih Bers</span></div></td><td><a href="https://satanaihdesign.com" target="_blank" rel="noopener">satanaihdesign.com</a></td></tr>
+      <tr><td class="num">54</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/eddie-oddo.jpg" alt=""><span>Eddie Oddo</span></div></td><td><a href="https://eddieoddo.com" target="_blank" rel="noopener">eddieoddo.com</a></td></tr>
+      <tr><td class="num">55</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/allison-richardson.jpg" alt=""><span>Allison Richardson</span></div></td><td><a href="https://allisonrichardsondesign.com" target="_blank" rel="noopener">allisonrichardsondesign.com</a></td></tr>
+      <tr><td class="num">56</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/kye-longbrake.jpg" alt=""><span>Kye Longbrake</span></div></td><td><a href="https://kyelongbrake.com" target="_blank" rel="noopener">kyelongbrake.com</a></td></tr>
+      <tr><td class="num">57</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/adam-wolshire.jpg" alt=""><span>Adam Wolshire</span></div></td><td><a href="https://adamwolshire.com" target="_blank" rel="noopener">adamwolshire.com</a></td></tr>
+      <tr><td class="num">58</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/shruti-parasher.jpg" alt=""><span>Shruti Parasher</span></div></td><td><a href="https://shrutiparasher.com" target="_blank" rel="noopener">shrutiparasher.com</a></td></tr>
+      <tr><td class="num">59</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/erica-frost.jpg" alt=""><span>Erica Frost</span></div></td><td><a href="https://erica-frost.com" target="_blank" rel="noopener">erica-frost.com</a></td></tr>
+      <tr><td class="num">60</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/matt-kerekanich.jpg" alt=""><span>Matt Kerekanich</span></div></td><td><a href="https://mattmk.com" target="_blank" rel="noopener">mattmk.com</a></td></tr>
+      <tr><td class="num">61</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/ethan-phillips.jpg" alt=""><span>Ethan Phillips</span></div></td><td><a href="https://ethanp-design.com" target="_blank" rel="noopener">ethanp-design.com</a></td></tr>
+      <tr><td class="num">62</td><td class="name"><div class="name-cell"><img class="thumb" src="thumbs/zoe-hong.jpg" alt=""><span>Zoe Hong</span></div></td><td><a href="https://zoehongid.com" target="_blank" rel="noopener">zoehongid.com</a></td></tr>
     </tbody>
   </table>
   <div class="toolbar">
